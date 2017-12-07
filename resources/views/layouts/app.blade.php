@@ -89,18 +89,27 @@
                   </li>
                   <li><a><i class="fa fa-exchange"></i> Transaksi  <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('akun.aset') }}">Pemasukan Tunai</a></li>
-                      <li><a href="{{ route('akun.modal')}}">Pemasukan Sebagai Piutang</a></li>
-                      <li><a href="{{ route('akun.pemasukan')}}">Pengeluaran Tunai</a></li>
-                      <li><a href="{{ route('akun.pengeluaran') }}">Pengeluaran Sebagai Hutang</a></li>
-                      <li><a href="{{ route('akun.hutang')}}">Tambah Hutang</a></li>
-                      <li><a href="{{ route('akun.piutang')}}">Bayar Hutang</a></li>
-                      <li><a href="{{ route('akun.aset') }}">Tambah Piutang</a></li>
+                      <li><a href="{{ route('pemasukanTunai') }}">Pemasukan Tunai</a></li>
+                      <li><a href="{{ route('pemasukanPiutang')}}">Pemasukan Sebagai Piutang</a></li>
+                      <li><a href="{{ route('pengeluaranTunai')}}">Pengeluaran Tunai</a></li>
+                      <li><a href="{{ route('pengeluaranHutang') }}">Pengeluaran Sebagai Hutang</a></li>
+                      <li><a href="{{ route('tambahHutang')}}">Tambah Hutang</a></li>
+                      <li><a href="#">Bayar Hutang</a></li>
+                      <!-- <li><a href="{{ route('akun.aset') }}">Tambah Piutang</a></li>
                         <li><a href="{{ route('akun.modal')}}">Penyetoran Piutang</a></li>
                         <li><a href="{{ route('akun.pemasukan')}}">Tambah Modal</a></li>
                         <li><a href="{{ route('akun.pengeluaran') }}">Tarik Modal</a></li>
                         <li><a href="{{ route('akun.hutang')}}">Pengalihan Aset</a></li>
-                        <li><a href="{{ route('akun.piutang')}}">Set Saldo Awal</a></li>
+                        <li><a href="{{ route('akun.piutang')}}">Set Saldo Awal</a></li> -->
+
+
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-archive"></i> Laporan  <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ route('jurnalUmum') }}">Jurnal Umum</a></li>
+                      <li><a href="{{route('bukuBesar')}}">Buku Besar</a></li>
 
 
                     </ul>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAkunsTable extends Migration
+class CreateCategoryTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAkunsTable extends Migration
      */
     public function up()
     {
-        Schema::create('akuns', function (Blueprint $table) {
-            $table->increments('id_akun');
-            $table->integer('id_user')->unsigned();
-            $table->string('nama');
+        Schema::create('category_transactions', function (Blueprint $table) {
+            $table->increments('kode_transaksi');
+            $table->string('nama_transaksi');
             $table->timestamps();
-            
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateAkunsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('akuns');
+        Schema::dropIfExists('category_transactions');
     }
 }

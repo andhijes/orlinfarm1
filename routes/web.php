@@ -56,3 +56,23 @@ Route::post('akun/piutang', 'AkunController@piutangStore')->name('akun.piutangSt
 
 Route::get('kontak/datakontak', 'KontakController@kontak')->name('kontak.datakontak');
 Route::post('kontak/datakontak', 'KontakController@kontakStore')->name('kontak.datakontakStore');
+
+Route::get('transaksi/pemasukanTunai', 'TransaksiController@pemasukanTunai')->name('pemasukanTunai');
+Route::post('transaksi/pemasukanTunai', 'TransaksiController@pemasukanTunaiStore')->name('pemasukanTunai.store');
+
+Route::get('transaksi/pemasukanPiutang', 'TransaksiController@pemasukanPiutang')->name('pemasukanPiutang');
+Route::post('transaksi/pemasukanPiutang', 'TransaksiController@pemasukanPiutangStore')->name('pemasukanPiutang.store');
+
+Route::get('transaksi/pengeluaranTunai', 'TransaksiController@pengeluaranTunai')->name('pengeluaranTunai');
+Route::post('transaksi/pengeluaranTunai', 'TransaksiController@pengeluaranTunaiStore')->name('pengeluaranTunai.store');
+
+Route::get('transaksi/pengeluaranHutang', 'TransaksiController@pengeluaranHutang')->name('pengeluaranHutang');
+Route::post('transaksi/pengeluaranHutang', 'TransaksiController@pengeluaranHutangStore')->name('pengeluaranHutang.store');
+
+Route::get('transaksi/tambahHutang', 'TransaksiController@tambahHutang')->name('tambahHutang');
+Route::post('transaksi/tambahHutang', 'TransaksiController@tambahHutangStore')->name('tambahHutang.store');
+
+Route::get('laporan/jurnalUmum', 'LaporanController@jurnalUmum')->name('jurnalUmum');
+Route::post('laporan/jurnalUmum', 'LaporanController@jurnalUmumStore')->name('jurnalUmum.store');
+
+Route::get('laporan/bukuBesar', 'LaporanController@bukuBesar')->name('bukuBesar');

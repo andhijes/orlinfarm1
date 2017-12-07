@@ -13,8 +13,6 @@ class ProdukController extends Controller
       return view('produk.create');
     }
 
-
-
     public function list()
     {
       $produks = Produk::all();

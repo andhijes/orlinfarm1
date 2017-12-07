@@ -18,7 +18,7 @@ class CreatePenjualanProduksTable extends Migration
             $table->increments('id_penjualan');
             $table->integer('id_user')->unsigned();
             $table->integer('id_produk')->unsigned();
-            $table->timestamps('tanggal');
+            $table->timestamps();
             $table->integer('tanggal');
             $table->integer('bulan');
             $table->integer('tahun');

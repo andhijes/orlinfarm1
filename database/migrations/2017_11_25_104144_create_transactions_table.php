@@ -15,15 +15,20 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id_transaksi');
-            $table->integer('id_akun')->unsigned();
             $table->integer('id_contact')->unsigned();
-            $table->timestamps('tanggal');
+            $table->integer('kode_transaksi')->unsigned();
+            $table->integer('kredit')->unsigned();
+            $table->integer('debit')->unsigned();
             $table->integer('nilai')->unsigned();
             $table->string('referensi');
             $table->text('keterangan');
+            $table->integer('tanggal');
+            $table->integer('bulan');
+            $table->integer('tahun');
+            $table->timestamps();
 
-            $table->foreign('id_akun')->references('id_akun')->on('akuns')->onDelete('CASCADE');
-            $table->foreign('id_contact')->references('id_contact')->on('contacts')->onDelete('CASCADE');
+            $table->foreign('kode_transaksi')->references('kode_transaksi')->on('category_transactions')->onDelete('CASCADE');
+
         });
     }
 

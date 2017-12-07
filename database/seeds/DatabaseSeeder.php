@@ -16,5 +16,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'ankarayu@gmail.com',
             'password' => bcrypt('andhika123'),
         ]);
+
+        $this->call(AkunSeeder::class);
+        $this->call(CabangAkunSeeder::class);
+        $this->call(ProdukSeeder::class);
+        $this->call(KontakSeeder::class);
+        $this->call(CategoryTransactionSeeder::class);
     }
 }
