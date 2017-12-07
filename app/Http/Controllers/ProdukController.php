@@ -28,18 +28,18 @@ class ProdukController extends Controller
 
     public function sell_store()
     {
+      $date = request('tanggal');
+      $orderdate = explode('-', $date);
+      $tanggal = $orderdate[2];
+      $bulan = $orderdate[1];
+      $tahun = $orderdate[0];
+
       $row_produk = request('id_produk');
       $produks1 = Produk::find($row_produk);
 
       $jumlah = $produks1['harga'] * request('jumlah');
       $update_stok = $produks1['stok'] - request('jumlah');
 
-      $tanggal = date('d');
-      $bulan = date('m');
-      $tahun = date('Y');
-      // dd($tahun);
-
-      // $jumlah = request('jumlah')*produks1->harga;
       Penjualan_produk ::create([
         'id_produk' => request('id_produk'),
         'jumlah' => request('jumlah'),

@@ -7,6 +7,11 @@
     {{ csrf_field() }}
 
     <div class="form-group">
+        <label for="">Tanggal</label>
+          <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="">
+    </div>
+
+    <div class="form-group">
         <label for="">Nama Produk</label>
         <select class="form-control" name="id_produk">
           @foreach ($produks as $produk)
