@@ -19,27 +19,20 @@
         <div class="form-group">
             <label for="">Pilih Bulan</label>
             <select class="form-control" name="bulan">
-                <option value="1">Januari</option>
-                <option value="2">Februari</option>
-                <option value="3">Maret</option>
-                <option value="4">April</option>
-                <option value="5">Mei</option>
-                <option value="6">Juni</option>
-                <option value="7">Juli</option>
-                <option value="8">Agustus</option>
-                <option value="9">September</option>
-                <option value="10">Oktober</option>
-                <option value="11">November</option>
-                <option value="12">Desember</option>
+             <?php for ($i = 0; $i <= 11; $i++){ ?>
+               foreach ($months)
+                   <option {{$i == $bulan ? 'selected' : ''}} value="<?php echo $i?>">{{$months[$i]}}</option>
+             <?php } ?>
             </select>
         </div>
+
         <div class="form-group">
             <label for="">Pilih Tahun</label>
             <select class="form-control" name="tahun">
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
-                <option value="2014">2014</option>
+              <?php for ($i = 0; $i < 5; $i++){ ?>
+                foreach ($years)
+                    <option {{$years[$i] == $tahun ? 'selected' : ''}} value="<?php echo $years[$i]?>">{{$years[$i]}}</option>
+              <?php } ?>
             </select>
         </div>
 
@@ -54,7 +47,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Jurnal Umum <b><?php echo $month?> - <?php echo $tahun ?> </h2>
+        <h2>Jurnal Umum <b><?php echo $month?> - <?php echo $tahun ?></b> </h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>

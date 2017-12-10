@@ -2,10 +2,51 @@
 
 @section('content')
 
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><b>Input Penjualan Harian</b></h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <form class="" action="{{ route('produk.sell_store')}}" method="post">
+        {{ csrf_field() }}
+
+        <div class="form-group">
+            <label for="">Tanggal</label>
+              <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="">
+        </div>
+
+        <div class="form-group">
+            <label for="">Nama Produk</label>
+            <select class="form-control" name="id_produk">
+              @foreach ($produks as $produk)
+                <option value="{{ $produk->id_produk }}">{{ $produk->nama }}</option>
+              @endforeach
+            </select>
+        </div>
+
+         <div class="form-group">
+            <label for="">Jumlah Produk </label>
+            <input id="jumlah" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk yang Terjual" value="">
+         </div>
+
+         <div class="form-group">
+           <input type="submit" name="" class="btn btn-primary" value="Save">
+         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Riwayat Penjualan Orlinfarm</h2>
+        <h2><b>Riwayat Penjualan Orlinfarm</b></h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>

@@ -92,8 +92,6 @@ class ProdukController extends Controller
 
     public function history()
     {
-      // $penjualan_produks = Penjualan_produk::all();
-      // return view('produk.history',  compact('penjualan_produks'));
       $produks = Produk::all();
       $penjualan_produks = Penjualan_produk::all();
       return view('produk.history',  compact('penjualan_produks', 'produks'));
@@ -106,9 +104,45 @@ class ProdukController extends Controller
       return view('produk.historyEdit', compact('penjualan','produks'));
     }
 
-    public function updateHistory()
+    public function updateHistory($id_penjualan)
     {
-      //
+      $penjualans = Penjualan_produk::find($id_penjualan);
+      $id_produk_lama = $penjualans['id_produk'];
+      $produk_lama = Produk::find($id_produk_lama);
+      $id_produk_baru = request('id_produk');
+
+      // dd($id_produk_baru, $id_produk_lama);
+      $produk_baru = Produk::find($id_produk_baru);
+// dd($produk_baru['nama']);
+      $penjualan_lama = $penjualans['jumlah'];
+      $penjualan_baru = request('jumlah');
+      if($id_produk_lama == $id_produk_baru){
+          $selisih = $penjualan_baru - $penjualan_lama;
+          $harga = $penjualans['harga'] + ($selisih*$produk_lama['harga']);
+          $produk_id = $id_produk_lama;
+          $stok_baru = $produk_lama['stok'] - $selisih;
+          $jumlah = request('jumlah');
+          $produk_lama->update([
+            'stok' => $stok_baru,
+          ]);
+      }else {
+        $produk_lama->update([
+          'stok' => $produk_lama['stok'] +  $penjualans['jumlah'],
+        ]);
+        $produk_baru->update([
+          'stok' => $produk_baru['stok'] - request('jumlah'),
+        ]);
+        $produk_id = $id_produk_baru;
+        $harga = $produk_baru['harga'] * request('jumlah');
+        $jumlah = request('jumlah');
+      }
+      $penjualans->update([
+        'id_produk' => $produk_id,
+        'jumlah' => $jumlah,
+        'harga' => $harga,
+      ]);
+      // return view(compact('produks1'))
+      return redirect()->route('produk.history');
     }
 
 }

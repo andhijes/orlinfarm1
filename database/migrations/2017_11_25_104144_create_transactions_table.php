@@ -20,12 +20,14 @@ class CreateTransactionsTable extends Migration
             $table->integer('kredit')->unsigned();
             $table->integer('debit')->unsigned();
             $table->integer('nilai')->unsigned();
+            $table->integer('sisa')->unsigned();
             $table->string('referensi');
             $table->text('keterangan');
             $table->integer('tanggal');
             $table->integer('bulan');
             $table->integer('tahun');
             $table->timestamps();
+
 
             $table->foreign('kode_transaksi')->references('kode_transaksi')->on('category_transactions')->onDelete('CASCADE');
 

@@ -10,101 +10,67 @@ class LaporanController extends Controller
 {
     public function jurnalUmum()
     {
-      $bulan = date('m');
+      $bulan = date('m') - 1; // biar bulannya sesuai di array --> array mulai dari 0
       $tahun = date('Y');
+      $year = date('Y');
+      $years = array($year, $year-1, $year-2, $year-3, $year-4, $year-5);
+      $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
+      $month = $months[$bulan]; //retrieve bulan
 
-      if($bulan == '1'){
-        $month = "Januari";
-      }else
-      if($bulan == '2'){
-          $month = "Februari";
-      }else
-      if($bulan == '3'){
-          $month = "Maret";
-      }else
-      if($bulan == '4'){
-          $month = "April";
-      }else
-      if($bulan == '5'){
-          $month = "Mei";
-      }else
-      if($bulan == '6'){
-          $month = "Juni";
-      }else
-      if($bulan == '7'){
-          $month = "Juli";
-      }else
-      if($bulan == '8'){
-          $month = "Agustus";
-      }else
-      if($bulan == '9'){
-          $month = "September";
-      }else
-      if($bulan == '10'){
-          $month = "Oktober";
-      }else
-      if($bulan == '11'){
-          $month = "November";
-      }else
-      if($bulan == '12'){
-          $month = "Desember";
-      }
-
-      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $tahun)->get();
+      $transaksis = \DB::table('transactions')->where('bulan', $bulan+1)->where('tahun', $tahun)->get();
       $cabang_akuns = cabang_akun::all();
-      return view('laporan.jurnalUmum', compact('bulan', 'tahun', 'transaksis', 'cabang_akuns', 'month', 'tahun'));
+      return view('laporan.jurnalUmum', compact('bulan', 'tahun', 'months', 'month', 'year', 'years', 'transaksis', 'cabang_akuns'));
     }
 
     public function jurnalUmumStore()
     {
-      // $date = request('tanggal');
       $bulan = request('bulan');
       $tahun = request('tahun');
+      $year = date('Y');
+      $years = array($year, $year-1, $year-2, $year-3, $year-4, $year-5);
+      $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
+      $kode_cabang = request('kode_cabang');
+      $month = $months[$bulan]; //retrieve bulan
 
-      if($bulan == '1'){
-        $month = "Januari";
-      }else
-      if($bulan == '2'){
-          $month = "Februari";
-      }else
-      if($bulan == '3'){
-          $month = "Maret";
-      }else
-      if($bulan == '4'){
-          $month = "April";
-      }else
-      if($bulan == '5'){
-          $month = "Mei";
-      }else
-      if($bulan == '6'){
-          $month = "Juni";
-      }else
-      if($bulan == '7'){
-          $month = "Juli";
-      }else
-      if($bulan == '8'){
-          $month = "Agustus";
-      }else
-      if($bulan == '9'){
-          $month = "September";
-      }else
-      if($bulan == '10'){
-          $month = "Oktober";
-      }else
-      if($bulan == '11'){
-          $month = "November";
-      }else
-      if($bulan == '12'){
-          $month = "Desember";
-      }
 
-      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $tahun)->get();
+      $transaksis = \DB::table('transactions')->where('bulan', $bulan+1)->where('tahun', $tahun)->get();
       $cabang_akuns = cabang_akun::all();
-      return view('laporan.jurnalUmum', compact('bulan', 'tahun', 'transaksis', 'cabang_akuns', 'month', 'tahun'));
-
+      return view('laporan.jurnalUmum', compact('bulan', 'month', 'months', 'tahun', 'year', 'years', 'transaksis', 'cabang_akuns'));
     }
+
     public function bukuBesar()
     {
-      return view('laporan.bukuBesar');
+      $bulan = date('m') - 1;
+      $tahun = date('Y');
+      $year = date('Y');
+      $years = array($tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-4, $tahun-5);
+      $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
+      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $tahun)->where('debit',1)->orwhere('kredit',1)->get();
+
+      $month = $months[$bulan]; //retrieve bulan
+      $cabang_akuns = cabang_akun::all();
+      $kode_cabang = 1;
+      return view('laporan.bukuBesar', compact('bulan','tahun', 'years', 'year', 'transaksis', 'month', 'cabang_akuns', 'tahun','kode_cabang','months'));
+
+    }
+
+    public function bukuBesarStore()
+    {
+      // $date = request('tanggal');
+      $bulan = request('bulan') + 1;
+      $tahun = request('tahun');
+      $years = array($tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-4, $tahun-5);
+      $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
+
+      $year = date('Y');
+      $kode_cabang = request('kode_cabang');
+
+
+      $month = $months[$bulan]; //retrieve bulan
+
+      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $year)
+                      ->where('debit',$kode_cabang)->orwhere('kredit',$kode_cabang)->get();
+      $cabang_akuns = cabang_akun::all();
+      return view('laporan.bukuBesar', compact('bulan', 'tahun', 'transaksis', 'cabang_akuns','years', 'year', 'month','months', 'tahun','kode_cabang'));
     }
 }

@@ -38,6 +38,7 @@ class TransaksiController extends Controller
       'tanggal' => $tanggal,
       'bulan' => $bulan,
       'tahun' => $tahun,
+      'sisa' => 0,
     ]);
     // return redirect()-> route('home');
     return redirect()-> route('pemasukanTunai');
@@ -72,6 +73,7 @@ class TransaksiController extends Controller
       'tanggal' => $tanggal,
       'bulan' => $bulan,
       'tahun' => $tahun,
+      'sisa' => 0,
     ]);
     // return redirect()-> route('home');
     return redirect()-> route('pemasukanPiutang');
@@ -103,6 +105,7 @@ class TransaksiController extends Controller
       'tanggal' => $tanggal,
       'bulan' => $bulan,
       'tahun' => $tahun,
+      'sisa' => 0,
     ]);
     // return redirect()-> route('home');
     return redirect()-> route('pengeluaranTunai');
@@ -135,6 +138,7 @@ class TransaksiController extends Controller
       'tanggal' => $tanggal,
       'bulan' => $bulan,
       'tahun' => $tahun,
+      'sisa' => 0,
     ]);
     // return redirect()-> route('home');
     return redirect()-> route('pengeluaranHutang');
@@ -167,8 +171,51 @@ class TransaksiController extends Controller
       'tanggal' => $tanggal,
       'bulan' => $bulan,
       'tahun' => $tahun,
+      'sisa' => request('nilai'),
     ]);
     // return redirect()-> route('home');
     return redirect()-> route('tambahHutang');
   }
+
+  public function bayarHutang()
+  {
+    $contacts = Contact::all();
+    $cabang_akuns = cabang_akun::all();
+    $bayar_hutang_users = \DB::table('transactions')->where('kode_transaksi', '5')->where('id_contact', '0')->get();
+    return view('transaksi.bayarHutang', compact('contacts', 'bayar_hutang_users', 'cabang_akuns'));
+  }
+
+  public function bayarHutangContact()
+  {
+    $contacts = Contact::all();
+    $contact_id = request('contact');
+    $cabang_akuns = cabang_akun::all();
+    $bayar_hutang_users = \DB::table('transactions')->where('kode_transaksi', '5')->where('id_contact', $contact_id)->get();
+    return view('transaksi.bayarHutang', compact('contacts', 'bayar_hutang_users', 'contact_id', 'cabang_akuns'));
+  }
+
+  public function bayarHutangStore()
+  {
+    $date = request('tanggal');
+    $orderdate = explode('-', $date);
+    $tanggal = $orderdate[2];
+    $bulan = $orderdate[1];
+    $tahun = $orderdate[0];
+
+    Transaction::create([
+      'id_contact' => request('contact'),
+      'kode_transaksi' => 5,
+      'kredit' => request('kredit'),
+      'debit' => request('debit'),
+      'nilai' => request('nilai'),
+      'referensi' => request('referensi'),
+      'keterangan' => request('keterangan'),
+      'tanggal' => $tanggal,
+      'bulan' => $bulan,
+      'tahun' => $tahun,
+    ]);
+    // return redirect()-> route('home');
+    return redirect()-> route('bayarHutang');
+  }
+
 }

@@ -7,24 +7,18 @@
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
 
-
-       <div class="form-group">
-          <label for="">Nama Produk</label>
-          <p class="form-control"> {{\app\Produk::find($penjualan->id_produk)->nama}} </p>
-       </div>
-
        <div class="form-group">
            <label for="">Nama Produk</label>
            <select class="form-control" name="id_produk">
              @foreach ($produks as $produk)
-               <option value="{{ $produk->id_produk }}">{{ $produk->nama }}</option>
+               <option {{$penjualan->id_produk == $produk->id_produk ? 'selected' : ''}} value="{{$produk->id_produk}}">{{$produk->nama}}</option>
              @endforeach
            </select>
        </div>
 
        <div class="form-group">
           <label for="">Stok</label>
-          <input id="produk" type="number" class="form-control" name="stok" placeholder="Jumlah Produk" value="{{ $penjualan -> jumlah}}">
+          <input id="produk" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk" value="{{ $penjualan -> jumlah}}">
        </div>
 
      <div class="form-group">

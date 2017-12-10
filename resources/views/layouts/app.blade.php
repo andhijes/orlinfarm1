@@ -71,7 +71,7 @@
                   <li><a><i class="fa fa-edit"></i>Produk <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('produk.list') }}">Daftar Produk</a></li>
-                      <li><a href="{{ route('produk.sell')}}">Penjualan Produk Harian</a></li>
+                      <!-- <li><a href="{{ route('produk.sell')}}">Penjualan Produk Harian</a></li> -->
                       <li><a href="{{ route('produk.history')}}">Riwayat Penjualan</a></li>
                       <!-- <li><a href="{{ route('produk.create') }}">Tambah Produk Inti</a></li> -->
                     </ul>
@@ -94,7 +94,7 @@
                       <li><a href="{{ route('pengeluaranTunai')}}">Pengeluaran Tunai</a></li>
                       <li><a href="{{ route('pengeluaranHutang') }}">Pengeluaran Sebagai Hutang</a></li>
                       <li><a href="{{ route('tambahHutang')}}">Tambah Hutang</a></li>
-                      <li><a href="#">Bayar Hutang</a></li>
+                      <li><a href="{{ route('bayarHutang')}}">Bayar Hutang</a></li>
                       <!-- <li><a href="{{ route('akun.aset') }}">Tambah Piutang</a></li>
                         <li><a href="{{ route('akun.modal')}}">Penyetoran Piutang</a></li>
                         <li><a href="{{ route('akun.pemasukan')}}">Tambah Modal</a></li>
