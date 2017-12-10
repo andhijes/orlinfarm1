@@ -70,7 +70,7 @@
               <td><?php echo e($user->keterangan); ?></td>
               <td><?php echo e($user->nilai); ?></td>
               <td><?php echo e($user->sisa); ?></td>
-              <td><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
+              <td><a href="<?php echo e(route('bayarHutang.update', $user->id_transaksi)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
                   <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
             </td>
             </tr>

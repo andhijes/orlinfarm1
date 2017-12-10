@@ -40,4 +40,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.appEditProduk', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.appEdit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -61,25 +61,63 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Produk <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-home"></i> Home </a>
+                  </li>
+
+                  <!-- <li><a href="<?php echo e(route('kontak.datakontak')); ?>"><i  class="fa fa-users"></i> Data Kontak</li> -->
+                  <li><a href="<?php echo e(route('kontak.datakontak')); ?>"><i class="fa fa-users"></i> Data Kontak </span></a>
+
+                  </li>
+                  <li><a><i class="fa fa-edit"></i>Produk <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo e(route('produk.sell')); ?>">Penjualan Produk Harian</a></li>
-                      <li><a href="<?php echo e(route('produk.list')); ?>">List Produk</a></li>
-                      <li><a href="<?php echo e(route('produk.create')); ?>">Tambah Produk Inti</a></li>
-					          </ul>
+                      <li><a href="<?php echo e(route('produk.list')); ?>">Daftar Produk</a></li>
+                      <!-- <li><a href="<?php echo e(route('produk.sell')); ?>">Penjualan Produk Harian</a></li> -->
+                      <li><a href="<?php echo e(route('produk.history')); ?>">Riwayat Penjualan</a></li>
+                      <!-- <li><a href="<?php echo e(route('produk.create')); ?>">Tambah Produk Inti</a></li> -->
+                    </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Penjualan Produk </a>
+                  <li><a><i class="fa fa-bank"></i> Akun <span class="fa fa-chevron-down"></span> </a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo e(route('akun.aset')); ?>">Aset</a></li>
+                      <li><a href="<?php echo e(route('akun.modal')); ?>">Modal</a></li>
+                      <li><a href="<?php echo e(route('akun.pemasukan')); ?>">Pemasukan</a></li>
+                      <li><a href="<?php echo e(route('akun.pengeluaran')); ?>">Pengeluaran</a></li>
+                      <li><a href="<?php echo e(route('akun.hutang')); ?>">Hutang</a></li>
+                      <li><a href="<?php echo e(route('akun.piutang')); ?>">Piutang</a></li>
 
+                    </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Akun </a>
+                  <li><a><i class="fa fa-exchange"></i> Transaksi  <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo e(route('pemasukanTunai')); ?>">Pemasukan Tunai</a></li>
+                      <li><a href="<?php echo e(route('pemasukanPiutang')); ?>">Pemasukan Sebagai Piutang</a></li>
+                      <li><a href="<?php echo e(route('pengeluaranTunai')); ?>">Pengeluaran Tunai</a></li>
+                      <li><a href="<?php echo e(route('pengeluaranHutang')); ?>">Pengeluaran Sebagai Hutang</a></li>
+                      <li><a href="<?php echo e(route('tambahHutang')); ?>">Tambah Hutang</a></li>
+                      <li><a href="<?php echo e(route('bayarHutang')); ?>">Bayar Hutang</a></li>
+                      <!-- <li><a href="<?php echo e(route('akun.aset')); ?>">Tambah Piutang</a></li>
+                        <li><a href="<?php echo e(route('akun.modal')); ?>">Penyetoran Piutang</a></li>
+                        <li><a href="<?php echo e(route('akun.pemasukan')); ?>">Tambah Modal</a></li>
+                        <li><a href="<?php echo e(route('akun.pengeluaran')); ?>">Tarik Modal</a></li>
+                        <li><a href="<?php echo e(route('akun.hutang')); ?>">Pengalihan Aset</a></li>
+                        <li><a href="<?php echo e(route('akun.piutang')); ?>">Set Saldo Awal</a></li> -->
 
+
+                    </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Transaksi </span></a>
 
+                  <li><a><i class="fa fa-archive"></i> Laporan  <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo e(route('jurnalUmum')); ?>">Jurnal Umum</a></li>
+                      <li><a href="<?php echo e(route('bukuBesar')); ?>">Buku Besar</a></li>
+
+
+                    </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Kontak</a>
-
+                  <!-- <li><a><i class="fa fa-bar-chart-o"></i> Kontak</a>
+                  </li> -->
                 </ul>
+
               </div>
 
             </div>

@@ -73,9 +73,10 @@ Route::get('transaksi/tambahHutang', 'TransaksiController@tambahHutang')->name('
 Route::post('transaksi/tambahHutang', 'TransaksiController@tambahHutangStore')->name('tambahHutang.store');
 
 Route::get('transaksi/bayarHutang', 'TransaksiController@bayarHutang')->name('bayarHutang');
-
-
 Route::post('transaksi/bayarHutang', 'TransaksiController@bayarHutangContact')->name('bayarHutang.contact');
+
+Route::get('transaksi/bayarHutangUpdate/{id_transaksi}', 'TransaksiController@bayarHutangUpdate')->name('bayarHutang.update');
+Route::patch('transaksi/bayarHutangUpdate/{id_transaksi}', 'TransaksiController@bayarHutangUpdateStore')->name('bayarHutang.updateStore');
 
 Route::get('laporan/jurnalUmum', 'LaporanController@jurnalUmum')->name('jurnalUmum');
 Route::post('laporan/jurnalUmum', 'LaporanController@jurnalUmumStore')->name('jurnalUmum.store');

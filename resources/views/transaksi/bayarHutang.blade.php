@@ -71,7 +71,7 @@
               <td>{{ $user->keterangan}}</td>
               <td>{{ $user->nilai}}</td>
               <td>{{ $user->sisa}}</td>
-              <td><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
+              <td><a href="{{ route('bayarHutang.update', $user->id_transaksi)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
                   <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
             </td>
             </tr>

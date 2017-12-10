@@ -191,31 +191,34 @@ class TransaksiController extends Controller
     $contact_id = request('contact');
     $cabang_akuns = cabang_akun::all();
     $bayar_hutang_users = \DB::table('transactions')->where('kode_transaksi', '5')->where('id_contact', $contact_id)->get();
-    return view('transaksi.bayarHutang', compact('contacts', 'bayar_hutang_users', 'contact_id', 'cabang_akuns'));
+
+    return view('transaksi.bayarHutang', compact('contacts', 'bayar_hutang_users', 'cabang_akuns'));
   }
 
-  public function bayarHutangStore()
+  public function bayarHutangUpdate($id_transaksi)
   {
-    $date = request('tanggal');
-    $orderdate = explode('-', $date);
-    $tanggal = $orderdate[2];
-    $bulan = $orderdate[1];
-    $tahun = $orderdate[0];
+    $transaksi_hutangs = Transaction::find($id_transaksi);
+    $contact = Contact::find($transaksi_hutangs->id_contact);
+    $nama = $contact['nama'];
 
-    Transaction::create([
-      'id_contact' => request('contact'),
-      'kode_transaksi' => 5,
-      'kredit' => request('kredit'),
-      'debit' => request('debit'),
-      'nilai' => request('nilai'),
-      'referensi' => request('referensi'),
-      'keterangan' => request('keterangan'),
-      'tanggal' => $tanggal,
-      'bulan' => $bulan,
-      'tahun' => $tahun,
+    $akun_asets = \DB::table('cabang_akuns')->where('id_akun', '1')->get();
+    $akun_hutangs = \DB::table('cabang_akuns')->where('id_akun', '5')->get();
+
+    return view('transaksi.bayarHutangUpdate', compact('transaksi_hutangs', 'akun_asets', 'akun_hutangs', 'nama'));
+  }
+
+  public function bayarHutangUpdateStore($id_transaksi)
+  {
+    $transaksi_hutangs = Transaction::find($id_transaksi);
+    $contact = Contact::find($transaksi_hutangs->id_contact);
+    $contact_id = $contact['id_contact'];
+
+    Trnasaction->create([
+      'nama' => request('nama'),
+      'harga' => request('harga'),
+      'stok' => request('stok'),
     ]);
-    // return redirect()-> route('home');
-    return redirect()-> route('bayarHutang');
+
   }
 
 }
