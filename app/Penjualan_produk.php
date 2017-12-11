@@ -10,7 +10,8 @@ class Penjualan_produk extends Model
     protected $fillable = ['id_produk',
     'jumlah',
     'id_user',
-    'harga',
+    'total_hargabeli',
+    'total_hargajual',
     'tanggal',
     'bulan',
     'tahun'

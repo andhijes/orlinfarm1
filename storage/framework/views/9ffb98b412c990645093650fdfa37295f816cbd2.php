@@ -16,18 +16,23 @@
 
 
         <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
-           <label for="">Nama</label>
-           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Produk..." value="">
+           <label for="">Nama Produk</label>
+           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama produk..." value="">
          </div>
 
          <div class="form-group">
-            <label for="">Harga</label>
-            <input id="harga"type="number" class="form-control" name="harga" placeholder="Harga Produk... (satuan)" value="">
+            <label for="">Harga Beli (IDR) </label>
+            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga beli produk.." value="">
+         </div>
+
+         <div class="form-group">
+            <label for="">Harga Jual (IDR) </label>
+            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga jual produk.." value="">
          </div>
 
          <div class="form-group">
             <label for="">Jumlah</label>
-            <input id="harga"type="string" class="form-control" name="stok" placeholder="Jumlah Produk..." value="">
+            <input id="harga"type="string" class="form-control" name="stok" placeholder="Jumlah produk..." value="">
          </div>
 
          <div class="form-group">
@@ -57,8 +62,9 @@
             <tr>
               <th>Nomor</th>
               <th>Nama Produk</th>
-              <th>Harga Produk</th>
               <th>Stok Produk</th>
+              <th>Harga Beli Produk</th>
+              <th>Harga Jual Produk</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -70,10 +76,11 @@
               <tr>
                 <td><?php echo $counter++ ?></td>
                 <td><?php echo e($produk->nama); ?></td>
-                <td><?php echo e($produk->harga); ?></td>
                 <td><?php echo e($produk->stok); ?></td>
-                <td><a href="<?php echo e(route('produk.edit',$produk->id_produk)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                <td>Rp.<?php echo e($produk->harga_beli); ?></td>
+                <td>Rp.<?php echo e($produk->harga_jual); ?></td>
+                <td><a href="<?php echo e(route('produk.edit',$produk->id_produk)); ?>"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                    <a href="#"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
               </td>
               </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appEdit')
 
 @section('content')
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -63,6 +63,9 @@
         <tbody>
           <?php $counter=1; ?>
           @foreach($bayar_hutang_users as $user)
+          <?php $test = $user->sisa ?>
+
+
             <tr>
               <td><?php echo $counter++ ?></td>
               <td>{{ $user->tanggal}}-{{ $user->bulan}}-{{ $user->tahun}}</td>
@@ -71,8 +74,13 @@
               <td>{{ $user->keterangan}}</td>
               <td>{{ $user->nilai}}</td>
               <td>{{ $user->sisa}}</td>
-              <td><a href="{{ route('bayarHutang.update', $user->id_transaksi)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
-                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
+
+              <td>
+                <?php if($test > 0){  ?>
+                <a href="{{ route('bayarHutang.update', $user->id_transaksi)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a> <?php }?>
+                <?php if($test == 0){  ?>
+                <a href="#" class="btn btn-success btn-xs">Lunas</a> <?php }?>
+                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
             </td>
             </tr>
           @endforeach

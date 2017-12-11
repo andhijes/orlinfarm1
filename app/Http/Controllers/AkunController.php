@@ -23,6 +23,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 1,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.aset');
   }
@@ -41,6 +42,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 2,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.modal');
   }
@@ -59,6 +61,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 3,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.pemasukan');
   }
@@ -77,6 +80,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 4,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.pengeluaran');
   }
@@ -95,6 +99,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 5,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.hutang');
   }
@@ -113,6 +118,7 @@ class AkunController extends Controller
       'kode' => request('kode'),
       'jumlah' => 0,
       'id_akun' => 6,
+      'status' => 1,
     ]);
     return redirect()-> route('akun.piutang');
   }

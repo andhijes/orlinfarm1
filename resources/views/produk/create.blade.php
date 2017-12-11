@@ -18,8 +18,13 @@
      </div>
 
      <div class="form-group">
-        <label for="">Harga (IDR) </label>
-        <input id="harga"type="number" class="form-control" name="harga" placeholder="Harga Produk" value="">
+        <label for="">Harga Beli (IDR) </label>
+        <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga Produk" value="">
+     </div>
+
+     <div class="form-group">
+        <label for="">Harga Jual (IDR) </label>
+        <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga Produk" value="">
      </div>
 
      <div class="form-group">

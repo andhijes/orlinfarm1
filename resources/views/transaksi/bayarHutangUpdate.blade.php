@@ -13,8 +13,10 @@
     </div>
     <div class="x_content">
 
-      <form class="" action="#" method="post">
+      <form class="" action="{{ route('bayarHutang.store',$transaksi_hutangs)}}" method="post">
         {{ csrf_field() }}
+        {{ method_field('PATCH') }}
+
 
         <div class="form-group">
             <label for="">Tanggal</label>
@@ -53,7 +55,7 @@
 
          <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
             <label for="">Keterangan</label>
-            <input id="nama" type="text" class="form-control" name="keterangan" placeholder="Pembayaran Hutang" value="">
+            <input id="nama" type="text" class="form-control" name="keterangan" placeholder="" value="Pembayaran Hutang">
           </div>
 
          <div class="form-group">

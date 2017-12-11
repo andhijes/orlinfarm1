@@ -23,8 +23,8 @@ class CreatePenjualanProduksTable extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->integer('jumlah')->unsigned();
-            $table->integer('harga')->unsigned();
-
+            $table->integer('total_hargajual')->unsigned();
+            $table->integer('total_hargabeli')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('id_produk')->references('id_produk')->on('produks')->onDelete('CASCADE');
         });

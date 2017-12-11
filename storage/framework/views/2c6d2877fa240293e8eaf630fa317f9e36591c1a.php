@@ -62,9 +62,9 @@
               <th>Nomor</th>
               <th>Tanggal</th>
               <th>Nama Produk</th>
-              <th>Harga Produk</th>
-              <th>Stok Produk</th>
+              <th>Jumlah Terjual</th>
               <th>Subtotal</th>
+              <th>Keuntungan</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -74,12 +74,13 @@
             <?php $counter=1; ?>
             <?php $__currentLoopData = $penjualan_produks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $penjualan_produk): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr>
+                <?php $keuntungan = $penjualan_produk->total_hargajual - $penjualan_produk->total_hargabeli?>
                 <td><?php echo $counter++ ?></td>
                 <td><?php echo e($penjualan_produk->tanggal); ?>-<?php echo e($penjualan_produk->bulan); ?>-<?php echo e($penjualan_produk->tahun); ?> </td>
                 <td><?php echo e(\app\Produk::find($penjualan_produk->id_produk)->nama); ?></td>
-                <td><?php echo e(\app\Produk::find($penjualan_produk->id_produk)->harga); ?></td>
                 <td><?php echo e($penjualan_produk->jumlah); ?></td>
-                <td><?php echo e($penjualan_produk->harga); ?></td>
+                <td><?php echo e($penjualan_produk->total_hargajual); ?></td>
+                <td><?php echo $keuntungan ?></td>
                 <td><a href="<?php echo e(route('produk.historyEdit',$penjualan_produk->id_penjualan)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                 </td>

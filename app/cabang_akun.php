@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class cabang_akun extends Model
 {
   protected $primaryKey = 'id_cabang';
-  protected $fillable = ['id_akun', 'kode', 'nama', 'jumlah'];
+  protected $fillable = ['id_akun', 'kode', 'nama', 'jumlah', 'status'];
 }

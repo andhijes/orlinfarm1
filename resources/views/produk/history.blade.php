@@ -63,9 +63,9 @@
               <th>Nomor</th>
               <th>Tanggal</th>
               <th>Nama Produk</th>
-              <th>Harga Produk</th>
-              <th>Stok Produk</th>
+              <th>Jumlah Terjual</th>
               <th>Subtotal</th>
+              <th>Keuntungan</th>
               <th>Opsi</th>
             </tr>
           </thead>
@@ -75,12 +75,13 @@
             <?php $counter=1; ?>
             @foreach($penjualan_produks as $penjualan_produk)
               <tr>
+                <?php $keuntungan = $penjualan_produk->total_hargajual - $penjualan_produk->total_hargabeli?>
                 <td><?php echo $counter++ ?></td>
                 <td>{{$penjualan_produk->tanggal }}-{{$penjualan_produk->bulan }}-{{$penjualan_produk->tahun }} </td>
                 <td>{{ \app\Produk::find($penjualan_produk->id_produk)->nama }}</td>
-                <td>{{ \app\Produk::find($penjualan_produk->id_produk)->harga }}</td>
                 <td>{{ $penjualan_produk->jumlah}}</td>
-                <td>{{ $penjualan_produk->harga}}</td>
+                <td>{{ $penjualan_produk->total_hargajual}}</td>
+                <td><?php echo $keuntungan ?></td>
                 <td><a href="{{ route('produk.historyEdit',$penjualan_produk->id_penjualan)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                 </td>

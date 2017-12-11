@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     protected $primaryKey = 'id_produk';
-    protected $fillable = ['nama', 'harga', 'stok'];
+    protected $fillable = ['nama', 'harga_jual', 'harga_beli', 'stok', 'status'];
 }

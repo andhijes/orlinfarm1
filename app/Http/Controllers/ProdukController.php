@@ -15,8 +15,7 @@ class ProdukController extends Controller
 
     public function list()
     {
-      $produks = Produk::all();
-
+      $produks = \DB::table('produks')->where('status','1')->get();
       return view('produk.list', compact('produks'));
     }
 
@@ -37,13 +36,15 @@ class ProdukController extends Controller
       $row_produk = request('id_produk');
       $produks1 = Produk::find($row_produk);
 
-      $jumlah = $produks1['harga'] * request('jumlah');
+      $total_hargajual = $produks1['harga_jual'] * request('jumlah');
+      $total_hargabeli = $produks1['harga_beli'] * request('jumlah');
       $update_stok = $produks1['stok'] - request('jumlah');
 
       Penjualan_produk ::create([
         'id_produk' => request('id_produk'),
         'jumlah' => request('jumlah'),
-        'harga' => $jumlah,
+        'total_hargabeli' => $total_hargabeli,
+        'total_hargajual' => $total_hargajual,
         'id_user' => auth()->id(),
         'tanggal' => $tanggal,
         'bulan' => $bulan,
@@ -55,15 +56,17 @@ class ProdukController extends Controller
         'stok' => $update_stok,
       ]);
 
-        return redirect()->route('produk.sell');
+        return redirect()->route('produk.history');
     }
 
     public function store()
     {
       Produk ::create([
         'nama' => request('nama'),
-        'harga' => request('harga'),
+        'harga_jual' => request('harga_jual'),
+        'harga_beli' => request('harga_beli'),
         'stok' => request('stok'),
+        'status' => 1,
         // 'slug'=>str_slug(request('nama'))
       ]);
 
@@ -83,13 +86,14 @@ class ProdukController extends Controller
 
       $produks1->update([
         'nama' => request('nama'),
-        'harga' => request('harga'),
+        'harga_jual' => request('harga_jual'),
+        'harga_beli' => request('harga_beli'),
         'stok' => request('stok'),
       ]);
       // return view(compact('produks1'))
       return redirect()->route('produk.list');
     }
-
+    
     public function history()
     {
       $produks = Produk::all();

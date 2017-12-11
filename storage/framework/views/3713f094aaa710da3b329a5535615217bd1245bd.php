@@ -11,8 +11,11 @@
     </div>
     <div class="x_content">
 
-      <form class="" action="#" method="post">
+      <form class="" action="<?php echo e(route('bayarHutang.store',$transaksi_hutangs)); ?>" method="post">
         <?php echo e(csrf_field()); ?>
+
+        <?php echo e(method_field('PATCH')); ?>
+
 
 
         <div class="form-group">
@@ -32,7 +35,7 @@
 
         <div class="form-group">
             <label for="">Untuk Pembayaran</label>
-            <select class="form-control" name="kredit">
+            <select class="form-control" name="debit">
               <option value="-1">Silahkan Pilih Akun</option>
               <?php $__currentLoopData = $akun_hutangs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $akun_hutang): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($akun_hutang->id_cabang); ?>"><?php echo e($akun_hutang->kode); ?> - <?php echo e($akun_hutang->nama); ?></option>
@@ -52,7 +55,7 @@
 
          <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
             <label for="">Keterangan</label>
-            <input id="nama" type="text" class="form-control" name="keterangan" placeholder="Pembayaran Hutang" value="">
+            <input id="nama" type="text" class="form-control" name="keterangan" placeholder="" value="Pembayaran Hutang">
           </div>
 
          <div class="form-group">

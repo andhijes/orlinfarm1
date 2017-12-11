@@ -62,6 +62,9 @@
         <tbody>
           <?php $counter=1; ?>
           <?php $__currentLoopData = $bayar_hutang_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php $test = $user->sisa ?>
+
+
             <tr>
               <td><?php echo $counter++ ?></td>
               <td><?php echo e($user->tanggal); ?>-<?php echo e($user->bulan); ?>-<?php echo e($user->tahun); ?></td>
@@ -70,8 +73,13 @@
               <td><?php echo e($user->keterangan); ?></td>
               <td><?php echo e($user->nilai); ?></td>
               <td><?php echo e($user->sisa); ?></td>
-              <td><a href="<?php echo e(route('bayarHutang.update', $user->id_transaksi)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a>
-                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
+
+              <td>
+                <?php if($test > 0){  ?>
+                <a href="<?php echo e(route('bayarHutang.update', $user->id_transaksi)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Bayar</a> <?php }?>
+                <?php if($test == 0){  ?>
+                <a href="#" class="btn btn-success btn-xs">Lunas</a> <?php }?>
+                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Hapus </a>
             </td>
             </tr>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -90,4 +98,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.appEdit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

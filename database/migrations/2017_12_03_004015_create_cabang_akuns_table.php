@@ -19,6 +19,7 @@ class CreateCabangAkunsTable extends Migration
           $table->integer('kode');
           $table->string('nama');
           $table->integer('jumlah')->unsigned();
+          $table->integer('status')->unsigned();
           $table->timestamps();
           $table->foreign('id_akun')->references('id_akun')->on('akuns')->onDelete('CASCADE');
 
