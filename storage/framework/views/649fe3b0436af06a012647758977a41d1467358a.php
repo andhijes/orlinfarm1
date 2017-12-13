@@ -26,15 +26,14 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <div class="row">
-                        <div class="col-sm-6">
-                          <?php echo $chart->render(); ?>  
-                        </div>
-                        <div class="col-sm-6">
-                          <?php echo $chart2->render(); ?>  
-                        </div>
-                    </div>                  
+                  <div class="x_content">                    
+                    <div class="col-md-12">
+                      <?php echo $chart->render(); ?>  
+                    </div>
+                    <hr>
+                    <div class="col-md-12">
+                      <?php echo $chart2->render(); ?>  
+                    </div>                                      
                   </div>
                 </div>
 

@@ -17,7 +17,8 @@
         <?php echo e(method_field('PATCH')); ?>
 
 
-        <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
+
+        <div class="form-group has-feedback<?php echo e($errors->has('nama') ? ' has-error': ''); ?>">
            <label for="">Nama Produk</label>
            <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Produk.." value="<?php echo e($produks1 -> nama); ?>">
            <?php if($errors->has('nama')): ?>
@@ -27,19 +28,34 @@
            <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback<?php echo e($errors->has('harga_beli') ? ' has-error': ''); ?>">
             <label for="">Harga Beli (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga Produk" value="<?php echo e($produks1 -> harga_beli); ?>">
+            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga Produk" value="<?php echo e($produks1 -> harga_beli); ?>" required>
+            <?php if($errors->has('harga_beli')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('harga_beli')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback<?php echo e($errors->has('harga_jual') ? ' has-error': ''); ?>">
             <label for="">Harga Jual (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga Produk" value="<?php echo e($produks1 -> harga_jual); ?>">
+            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga Produk" value="<?php echo e($produks1 -> harga_jual); ?>" required>
+            <?php if($errors->has('harga_jual')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('harga_jual')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback<?php echo e($errors->has('stok') ? ' has-error': ''); ?>">
             <label for="">Stok</label>
-            <input id="produk" type="number" class="form-control" name="stok" placeholder="Jumlah Produk" value="<?php echo e($produks1 -> stok); ?>">
+            <input id="produk" type="number" class="form-control" name="stok" placeholder="Jumlah Produk" value="<?php echo e($produks1 -> stok); ?>" required>
+            <?php if($errors->has('stok')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('stok')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
          <div class="form-group">

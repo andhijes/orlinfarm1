@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo e(route('home')); ?>" class="site_title"><i class="fa fa-bar-chart"></i> <span><?php echo $__env->yieldContent('name'); ?></span></a>
+              <a href="<?php echo e(route('home')); ?>" class="site_title"><i class="fa fa-area-chart"></i> <span>Orlinfarm</span></a>
             </div>
 
             <div class="clearfix"></div>
