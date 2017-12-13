@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('home');
+// })->middleware('auth');
+
+Route::get('/', 'HomeController@getCharts')->name('home')->middleware('auth');
 
 Auth::routes();
 
@@ -106,3 +108,4 @@ Route::post('laporan/jurnalUmum', 'LaporanController@jurnalUmumStore')->name('ju
 
 Route::get('laporan/bukuBesar', 'LaporanController@bukuBesar')->name('bukuBesar');
 Route::post('laporan/bukuBesar', 'LaporanController@bukuBesarStore')->name('bukuBesar.store');
+
