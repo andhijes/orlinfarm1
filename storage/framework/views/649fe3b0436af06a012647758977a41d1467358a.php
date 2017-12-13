@@ -15,11 +15,11 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>                      
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">2017</a>
+                        <li><a href="<?php echo e(route('home.param',['tahun' => 2017])); ?>">2017</a>
                         </li>
-                        <li><a href="#">2016</a>
+                        <li><a href="<?php echo e(route('home.param',['tahun' => 2016])); ?>">2016</a>
                         </li>
-                        <li><a href="#">2015</a>
+                        <li><a href="<?php echo e(route('home.param',['tahun' => 2015])); ?>">2015</a>
                         </li>                        
                       </ul>
                     </div>
@@ -32,7 +32,7 @@
                           <?php echo $chart->render(); ?>  
                         </div>
                         <div class="col-sm-6">
-                          <?php echo $chart->render(); ?>  
+                          <?php echo $chart2->render(); ?>  
                         </div>
                     </div>                  
                   </div>

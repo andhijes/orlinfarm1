@@ -15,9 +15,14 @@
         <?php echo e(csrf_field()); ?>
 
 
-        <div class="form-group">
+        <div class="form-group has-feedback<?php echo e($errors->has('tanggal') ? ' has-error': ''); ?>">
             <label for="">Tanggal</label>
-              <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="">
+              <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="<?php echo e(old('tanggal')); ?>" required>
+              <?php if($errors->has('tanggal')): ?>
+                <span class="help-block">
+                  <p><?php echo e($errors->first('tanggal')); ?></p>
+                </span>
+              <?php endif; ?>
         </div>
 
         <div class="form-group">
@@ -29,9 +34,14 @@
             </select>
         </div>
 
-         <div class="form-group">
+           <div class="form-group has-feedback<?php echo e($errors->has('jumlah') ? ' has-error': ''); ?>">
             <label for="">Jumlah Produk </label>
-            <input id="jumlah" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk yang Terjual" value="">
+            <input id="jumlah" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk yang Terjual" value="<?php echo e(old('jumlah')); ?>" required>
+            <?php if($errors->has('jumlah')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('jumlah')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
          <div class="form-group">
@@ -82,8 +92,19 @@
                 <td><?php echo e($penjualan_produk->total_hargajual); ?></td>
                 <td><?php echo $keuntungan ?></td>
                 <td><a href="<?php echo e(route('produk.historyEdit',$penjualan_produk->id_penjualan)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                  <br>
+                  <form class="" action="<?php echo e(route('penjualan.delete',$penjualan_produk->id_penjualan)); ?>" method="post">
+                    <?php echo e(csrf_field()); ?>
+
+                    <?php echo e(method_field('DELETE')); ?>
+
+                    <input type="submit" name="" class="btn btn-danger btn-xs" value="Delete">
+                  </form>
                 </td>
+
+
+
+
               </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

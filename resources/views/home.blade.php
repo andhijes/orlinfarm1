@@ -16,11 +16,11 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>                      
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">2017</a>
+                        <li><a href="{{route('home.param',['tahun' => 2017])}}">2017</a>
                         </li>
-                        <li><a href="#">2016</a>
+                        <li><a href="{{route('home.param',['tahun' => 2016])}}">2016</a>
                         </li>
-                        <li><a href="#">2015</a>
+                        <li><a href="{{route('home.param',['tahun' => 2015])}}">2015</a>
                         </li>                        
                       </ul>
                     </div>
@@ -33,7 +33,7 @@
                           {!! $chart->render() !!}  
                         </div>
                         <div class="col-sm-6">
-                          {!! $chart->render() !!}  
+                          {!! $chart2->render() !!}  
                         </div>
                     </div>                  
                   </div>
