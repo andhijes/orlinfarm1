@@ -16,19 +16,24 @@
       <form class="" action="{{ route('bukuBesar.store')}}" method="post">
         {{ csrf_field() }}
 
+
+
         <div class="form-group">
             <label for="">PIlih Akun</label>
             <select class="form-control" name="kode_cabang">
               @foreach ($cabang_akuns as $cabang_akun)
-                <option value="{{$cabang_akun->id_cabang}}">{{$cabang_akun->kode}} - {{$cabang_akun->nama}}</option>
-              @endforeach
+
+            <option {{$kode_cabang == $cabang_akun->id_cabang ? 'selected' : ''}} value="{{$cabang_akun->id_cabang}}">{{$cabang_akun->kode}} - {{$cabang_akun->nama}}</option>
+            @endforeach
             </select>
         </div>
+
+
 
         <div class="form-group">
           <?php $number=0; ?>
             <label for="">Pilih Bulan</label>
-            <?php $test = $bulan - 1; ?>
+            <?php $test = $bulan - 1;?>
             <select class="form-control" name="bulan">
              <?php for ($i = 0; $i <= 11; $i++){ ?>
                foreach ($months)

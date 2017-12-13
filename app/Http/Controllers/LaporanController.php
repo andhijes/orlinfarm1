@@ -45,11 +45,11 @@ class LaporanController extends Controller
       $year = date('Y');
       $years = array($tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-4, $tahun-5);
       $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
-      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $tahun)->where('debit',1)->orwhere('kredit',1)->get();
+      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $tahun)->where('debit',0)->orwhere('kredit',0)->get();
 
       $month = $months[$bulan]; //retrieve bulan
       $cabang_akuns = cabang_akun::all();
-      $kode_cabang = 1;
+      $kode_cabang = 0;
       return view('laporan.bukuBesar', compact('bulan','tahun', 'years', 'year', 'transaksis', 'month', 'cabang_akuns', 'tahun','kode_cabang','months'));
 
     }
@@ -57,19 +57,20 @@ class LaporanController extends Controller
     public function bukuBesarStore()
     {
       // $date = request('tanggal');
-      $bulan = request('bulan') + 1;
+      $bulan = request('bulan');
       $tahun = request('tahun');
       $years = array($tahun, $tahun-1, $tahun-2, $tahun-3, $tahun-4, $tahun-5);
       $months = array("Januari","Februari", "Maret", "April","Mei","Juni","Juli","Agustus","September","Oktober","November", "Desember");
 
       $year = date('Y');
       $kode_cabang = request('kode_cabang');
+      $bulans = $bulan+1;
 
+      $month = $months[$bulan-1]; //retrieve bulan
 
-      $month = $months[$bulan]; //retrieve bulan
+      $transaksis = \DB::table('transactions')->where('bulan', $bulans)->where('tahun', $year)->where('debit',$kode_cabang)->
+      orwhere('kredit',$kode_cabang)->where('bulan', $bulans)->where('tahun', $year)->get();
 
-      $transaksis = \DB::table('transactions')->where('bulan', $bulan)->where('tahun', $year)
-                      ->where('debit',$kode_cabang)->orwhere('kredit',$kode_cabang)->get();
       $cabang_akuns = cabang_akun::all();
       return view('laporan.bukuBesar', compact('bulan', 'tahun', 'transaksis', 'cabang_akuns','years', 'year', 'month','months', 'tahun','kode_cabang'));
     }

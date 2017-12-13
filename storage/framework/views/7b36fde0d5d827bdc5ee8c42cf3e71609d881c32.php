@@ -15,19 +15,24 @@
         <?php echo e(csrf_field()); ?>
 
 
+
+
         <div class="form-group">
             <label for="">PIlih Akun</label>
             <select class="form-control" name="kode_cabang">
               <?php $__currentLoopData = $cabang_akuns; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cabang_akun): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($cabang_akun->id_cabang); ?>"><?php echo e($cabang_akun->kode); ?> - <?php echo e($cabang_akun->nama); ?></option>
-              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <option <?php echo e($kode_cabang == $cabang_akun->id_cabang ? 'selected' : ''); ?> value="<?php echo e($cabang_akun->id_cabang); ?>"><?php echo e($cabang_akun->kode); ?> - <?php echo e($cabang_akun->nama); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
         </div>
+
+
 
         <div class="form-group">
           <?php $number=0; ?>
             <label for="">Pilih Bulan</label>
-            <?php $test = $bulan - 1; ?>
+            <?php $test = $bulan - 1;?>
             <select class="form-control" name="bulan">
              <?php for ($i = 0; $i <= 11; $i++){ ?>
                foreach ($months)

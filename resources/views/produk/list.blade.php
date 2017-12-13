@@ -16,24 +16,44 @@
       <form class="" action="{{ route('produk.store')}}" method="post">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
+        <div class="form-group has-feedback{{ $errors->has('nama') ? ' has-error': '' }}">
            <label for="">Nama Produk</label>
-           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama produk..." value="">
+           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Produk.." value="{{old('nama')}}" required>
+           @if ($errors->has('nama'))
+             <span class="help-block">
+               <p>{{ $errors->first('nama') }}</p>
+             </span>
+           @endif
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback{{ $errors->has('harga_beli') ? ' has-error': '' }}">
             <label for="">Harga Beli (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga beli produk.." value="">
+            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga Produk" value="{{old('harga_beli')}}" required>
+            @if ($errors->has('harga_beli'))
+              <span class="help-block">
+                <p>{{ $errors->first('harga_beli') }}</p>
+              </span>
+            @endif
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback{{ $errors->has('harga_jual') ? ' has-error': '' }}">
             <label for="">Harga Jual (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga jual produk.." value="">
+            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga Produk" value="{{old('harga_jual')}}" required>
+            @if ($errors->has('harga_jual'))
+              <span class="help-block">
+                <p>{{ $errors->first('harga_jual') }}</p>
+              </span>
+            @endif
          </div>
 
-         <div class="form-group">
-            <label for="">Jumlah</label>
-            <input id="harga"type="string" class="form-control" name="stok" placeholder="Jumlah produk..." value="">
+         <div class="form-group has-feedback{{ $errors->has('stok') ? ' has-error': '' }}">
+            <label for="">Stok</label>
+            <input id="produk" type="number" class="form-control" name="stok" placeholder="Jumlah Produk" value="{{old('stok')}}" required>
+            @if ($errors->has('stok'))
+              <span class="help-block">
+                <p>{{ $errors->first('stok') }}</p>
+              </span>
+            @endif
          </div>
 
          <div class="form-group">
@@ -81,7 +101,8 @@
                 <td>Rp.{{ $produk->harga_beli}}</td>
                 <td>Rp.{{ $produk->harga_jual}}</td>
                 <td><a href="{{ route('produk.edit',$produk->id_produk)}}"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                    <a href="{{ route('produk.delete',$produk->id_produk)}}"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+
               </td>
               </tr>
             @endforeach

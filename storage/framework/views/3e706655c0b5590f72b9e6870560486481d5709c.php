@@ -16,15 +16,25 @@
         <?php echo e(csrf_field()); ?>
 
 
-        <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
+        <div class="form-group<?php echo e($errors->has('kode') ? ' has-error' : ''); ?>">
            <label for="">Kode</label>
-           <input id="nama" type="text" class="form-control" name="kode" placeholder="Kode.." value="">
+           <input id="nama" type="number" class="form-control" name="kode" placeholder="Kode.." value="<?php echo e(old('kode')); ?>">
+           <?php if($errors->has('kode')): ?>
+             <span class="help-block">
+               <p><?php echo e($errors->first('kode')); ?></p>
+             </span>
+           <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
             <label for="">Nama</label>
-            <input id="harga"type="string" class="form-control" name="nama" placeholder="Nama.." value="">
-         </div>
+            <input id="harga"type="string" class="form-control" name="nama" placeholder="Nama.." value="<?php echo e(old('nama')); ?>">
+            <?php if($errors->has('nama')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('nama')); ?></p>
+              </span>
+            <?php endif; ?>
+          </div>
 
 
          <div class="form-group">
@@ -58,12 +68,14 @@
 
           <tbody>
             <?php $counter=1; ?>
-            <?php $__currentLoopData = $row_piutang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cabang_akun): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $row; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cabang_akun): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <tr>
                 <td><?php echo e($cabang_akun->kode); ?></td>
                 <td><?php echo e($cabang_akun->nama); ?></td>
-                <td><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                <td>
+                  <a href="<?php echo e(route('cabang.edit',$cabang_akun->id_cabang)); ?>"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                  <a href="<?php echo e(route('piutang.delete',$cabang_akun->id_cabang)); ?>"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+
               </td>
               </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

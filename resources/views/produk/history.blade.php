@@ -16,9 +16,14 @@
       <form class="" action="{{ route('produk.sell_store')}}" method="post">
         {{ csrf_field() }}
 
-        <div class="form-group">
+        <div class="form-group has-feedback{{ $errors->has('tanggal') ? ' has-error': '' }}">
             <label for="">Tanggal</label>
-              <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="">
+              <input id="tanggal" type="date" class="form-control" name="tanggal" placeholder="" value="{{old('tanggal')}}" required>
+              @if ($errors->has('tanggal'))
+                <span class="help-block">
+                  <p>{{ $errors->first('tanggal') }}</p>
+                </span>
+              @endif
         </div>
 
         <div class="form-group">
@@ -30,9 +35,14 @@
             </select>
         </div>
 
-         <div class="form-group">
+           <div class="form-group has-feedback{{ $errors->has('jumlah') ? ' has-error': '' }}">
             <label for="">Jumlah Produk </label>
-            <input id="jumlah" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk yang Terjual" value="">
+            <input id="jumlah" type="number" class="form-control" name="jumlah" placeholder="Jumlah Produk yang Terjual" value="{{ old('jumlah')}}" required>
+            @if ($errors->has('jumlah'))
+              <span class="help-block">
+                <p>{{ $errors->first('jumlah') }}</p>
+              </span>
+            @endif
          </div>
 
          <div class="form-group">
@@ -83,8 +93,17 @@
                 <td>{{ $penjualan_produk->total_hargajual}}</td>
                 <td><?php echo $keuntungan ?></td>
                 <td><a href="{{ route('produk.historyEdit',$penjualan_produk->id_penjualan)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                  <br>
+                  <form class="" action="{{ route('penjualan.delete',$penjualan_produk->id_penjualan)}}" method="post">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <input type="submit" name="" class="btn btn-danger btn-xs" value="Delete">
+                  </form>
                 </td>
+
+
+
+
               </tr>
             @endforeach
 

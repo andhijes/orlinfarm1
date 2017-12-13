@@ -27,6 +27,14 @@ class ProdukController extends Controller
 
     public function sell_store()
     {
+
+      $this->validate(request(), [
+          'tanggal' => 'required|date',
+          'id_produk' => 'required',
+          'jumlah' => 'required|max:1000000'
+      ]);
+
+
       $date = request('tanggal');
       $orderdate = explode('-', $date);
       $tanggal = $orderdate[2];
@@ -61,6 +69,13 @@ class ProdukController extends Controller
 
     public function store()
     {
+      $this->validate(request(), [
+          'nama' => 'required|min:4|max:70',
+          'harga_beli' => 'required|max:1000000000',
+          'harga_jual' => 'required|max:1000000000',
+          'stok' => 'required|max:1000000'
+      ]);
+
       Produk ::create([
         'nama' => request('nama'),
         'harga_jual' => request('harga_jual'),
@@ -70,7 +85,7 @@ class ProdukController extends Controller
         // 'slug'=>str_slug(request('nama'))
       ]);
 
-      return redirect()->route('produk.list');
+      return redirect()->route('produk.list')->withSuccess('Produk anda berhasil ditambahkan.');
     }
 
     public function edit($id_produk)
@@ -93,7 +108,17 @@ class ProdukController extends Controller
       // return view(compact('produks1'))
       return redirect()->route('produk.list');
     }
-    
+
+    public function delete($id_produk)
+    {
+      $produks1 = Produk::find($id_produk);
+      $produks1->update([
+        'status' => 0,
+      ]);
+      return redirect()->route('produk.list');
+    }
+
+//------------------------ HISTORY PENJUALAN--------------------------------------------
     public function history()
     {
       $produks = Produk::all();
@@ -110,14 +135,16 @@ class ProdukController extends Controller
 
     public function updateHistory($id_penjualan)
     {
+      $this->validate(request(), [
+          'jumlah' => 'required|min:1|max:100000',
+      ]);
+
       $penjualans = Penjualan_produk::find($id_penjualan);
       $id_produk_lama = $penjualans['id_produk'];
       $produk_lama = Produk::find($id_produk_lama);
       $id_produk_baru = request('id_produk');
 
-      // dd($id_produk_baru, $id_produk_lama);
       $produk_baru = Produk::find($id_produk_baru);
-// dd($produk_baru['nama']);
       $penjualan_lama = $penjualans['jumlah'];
       $penjualan_baru = request('jumlah');
       if($id_produk_lama == $id_produk_baru){
@@ -146,6 +173,20 @@ class ProdukController extends Controller
         'harga' => $harga,
       ]);
       // return view(compact('produks1'))
+      return redirect()->route('produk.history');
+    }
+
+    public function deletePenjualan($id_penjualan)
+    {
+      $data_penjualan = Penjualan_produk::find($id_penjualan);
+      $produk_id = $data_penjualan['id_produk'];
+      $data_produk = Produk::find($produk_id);
+
+      $data_produk->update([
+        'stok' => $data_produk['stok'] + $data_penjualan['jumlah'],
+      ]);
+
+      $data_penjualan->delete();
       return redirect()->route('produk.history');
     }
 

@@ -15,24 +15,44 @@
         <?php echo e(csrf_field()); ?>
 
 
-        <div class="form-group<?php echo e($errors->has('nama') ? ' has-error' : ''); ?>">
+        <div class="form-group has-feedback<?php echo e($errors->has('nama') ? ' has-error': ''); ?>">
            <label for="">Nama Produk</label>
-           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama produk..." value="">
+           <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama Produk.." value="<?php echo e(old('nama')); ?>" required>
+           <?php if($errors->has('nama')): ?>
+             <span class="help-block">
+               <p><?php echo e($errors->first('nama')); ?></p>
+             </span>
+           <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback<?php echo e($errors->has('harga_beli') ? ' has-error': ''); ?>">
             <label for="">Harga Beli (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga beli produk.." value="">
+            <input id="harga"type="number" class="form-control" name="harga_beli" placeholder="Harga Produk" value="<?php echo e(old('harga_beli')); ?>" required>
+            <?php if($errors->has('harga_beli')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('harga_beli')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
-         <div class="form-group">
+         <div class="form-group has-feedback<?php echo e($errors->has('harga_jual') ? ' has-error': ''); ?>">
             <label for="">Harga Jual (IDR) </label>
-            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga jual produk.." value="">
+            <input id="harga"type="number" class="form-control" name="harga_jual" placeholder="Harga Produk" value="<?php echo e(old('harga_jual')); ?>" required>
+            <?php if($errors->has('harga_jual')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('harga_jual')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
-         <div class="form-group">
-            <label for="">Jumlah</label>
-            <input id="harga"type="string" class="form-control" name="stok" placeholder="Jumlah produk..." value="">
+         <div class="form-group has-feedback<?php echo e($errors->has('stok') ? ' has-error': ''); ?>">
+            <label for="">Stok</label>
+            <input id="produk" type="number" class="form-control" name="stok" placeholder="Jumlah Produk" value="<?php echo e(old('stok')); ?>" required>
+            <?php if($errors->has('stok')): ?>
+              <span class="help-block">
+                <p><?php echo e($errors->first('stok')); ?></p>
+              </span>
+            <?php endif; ?>
          </div>
 
          <div class="form-group">
@@ -80,7 +100,8 @@
                 <td>Rp.<?php echo e($produk->harga_beli); ?></td>
                 <td>Rp.<?php echo e($produk->harga_jual); ?></td>
                 <td><a href="<?php echo e(route('produk.edit',$produk->id_produk)); ?>"  class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                    <a href="#"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                    <a href="<?php echo e(route('produk.delete',$produk->id_produk)); ?>"  class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+
               </td>
               </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

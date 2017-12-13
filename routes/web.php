@@ -26,8 +26,14 @@ Route::post('/produk/create', 'ProdukController@store')->name('produk.store');
 Route::get('/produk/edit/{id_produk}', 'ProdukController@edit')->name('produk.edit');
 Route::patch('/produk/edit/{id_produk}', 'ProdukController@update')->name('produk.update');
 
+
+Route::get('/produk/list/{id_produk}', 'ProdukController@delete')->name('produk.delete');
+
+
+
 Route::get('/produk/historyEdit/{id_penjualan}', 'ProdukController@editHistory')->name('produk.historyEdit');
 Route::patch('/produk/historyEdit/{id_penjualan}', 'ProdukController@updateHistory')->name('produk.historyUpdate');
+Route::delete('/produk/history/{id_penjualan}', 'ProdukController@deletePenjualan')->name('penjualan.delete');
 
 
 Route::get('/produk/list', 'ProdukController@list')->name('produk.list');
@@ -35,24 +41,41 @@ Route::get('/produk/list', 'ProdukController@list')->name('produk.list');
 Route::get('/produk/sell', 'ProdukController@sell')->name('produk.sell');
 Route::post('/produk/sell', 'ProdukController@sell_store')->name('produk.sell_store');
 
-// Akun
+//----------------------------------AKUN ASET------------------------------------------------------------------
 Route::get('akun/aset', 'AkunController@aset')->name('akun.aset');
 Route::post('akun/aset', 'AkunController@asetStore')->name('akun.asetStore');
+Route::get('/akun/aset/{id_cabang}', 'AkunController@cabangDelete')->name('aset.delete');
+//==========================================CABANG EDIT============================================
+Route::get('/akun/cabangEdit/{id_cabang}', 'AkunController@cabangEdit')->name('cabang.edit');
+Route::patch('/akun/cabangEdit/{id_cabang}', 'AkunController@cabangUpdate')->name('cabang.update');
 
+
+//================================AKUN MODAL==========================================
 Route::get('akun/modal', 'AkunController@modal')->name('akun.modal');
 Route::post('akun/modal', 'AkunController@modalStore')->name('akun.modalStore');
+Route::get('/akun/modal/{id_cabang}', 'AkunController@cabangDelete')->name('modal.delete');
 
+
+//===================================AKUN PEMASUKAN======================================
 Route::get('akun/pemasukan', 'AkunController@pemasukan')->name('akun.pemasukan');
 Route::post('akun/pemasukan', 'AkunController@pemasukanStore')->name('akun.pemasukanStore');
+Route::get('/akun/pemasukan/{id_cabang}', 'AkunController@cabangDelete')->name('pemasukan.delete');
 
 Route::get('akun/pengeluaran', 'AkunController@pengeluaran')->name('akun.pengeluaran');
 Route::post('akun/pengeluaran', 'AkunController@pengeluaranStore')->name('akun.pengeluaranStore');
+Route::get('/akun/pengeluaran/{id_cabang}', 'AkunController@cabangDelete')->name('pengeluaran.delete');
+
 
 Route::get('akun/hutang', 'AkunController@hutang')->name('akun.hutang');
 Route::post('akun/hutang', 'AkunController@hutangStore')->name('akun.hutangStore');
+Route::get('/akun/hutang/{id_cabang}', 'AkunController@cabangDelete')->name('hutang.delete');
+
 
 Route::get('akun/piutang', 'AkunController@piutang')->name('akun.piutang');
 Route::post('akun/piutang', 'AkunController@piutangStore')->name('akun.piutangStore');
+Route::get('/akun/piutang/{id_cabang}', 'AkunController@cabangDelete')->name('piutang.delete');
+
+
 
 Route::get('kontak/datakontak', 'KontakController@kontak')->name('kontak.datakontak');
 Route::post('kontak/datakontak', 'KontakController@kontakStore')->name('kontak.datakontakStore');

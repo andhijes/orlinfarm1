@@ -9,15 +9,17 @@ use App\cabang_akun;
 class AkunController extends Controller
 {
 
+
   //========================ASET========================
   public function aset()
   {
-    $row_aset = \DB::table('cabang_akuns')->where('id_akun', '1')->get();
-    return view('akun.aset', compact('row_aset'));
+    $row = \DB::table('cabang_akuns')->where('id_akun', '1')->where('status', '1')->get();
+    return view('akun.aset', compact('row'));
   }
 
-  public function asetStore()
+  public function asetStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -28,15 +30,90 @@ class AkunController extends Controller
     return redirect()-> route('akun.aset');
   }
 
+//====================CABANG ALL==============================
+  public function cabangEdit($id_cabang)
+  {
+    $akun_cabang = cabang_akun::find($id_cabang);
+    return view('akun.cabangEdit', compact('akun_cabang'));
+  }
+
+  public function cabangUpdate($id_cabang)
+  {
+    $akun_cabang = cabang_akun::find($id_cabang);
+    $kode_akun = $akun_cabang['id_akun'];
+    $akun_cabang->update([
+      'kode' => request('kode'),
+      'nama' => request('nama'),
+    ]);
+
+    if($kode_akun == 1){
+      return redirect()-> route('akun.aset');
+    }
+
+    if($kode_akun == 2){
+      return redirect()-> route('akun.modal');
+    }
+
+    if($kode_akun == 3){
+      return redirect()-> route('akun.pemasukan');
+    }
+
+    if($kode_akun == 4){
+      return redirect()-> route('akun.pengeluaran');
+    }
+
+    if($kode_akun == 5){
+      return redirect()-> route('akun.hutang');
+    }
+
+    if($kode_akun == 6){
+      return redirect()-> route('akun.piutang');
+    }
+  }
+
+  public function cabangDelete($id_cabang)
+  {
+    $akun_cabang = cabang_akun::find($id_cabang);
+    $kode_akun = $akun_cabang['id_akun'];
+    $akun_cabang->update([
+      'status' => 0,
+    ]);
+
+    if($kode_akun == 1){
+      return redirect()-> route('akun.aset');
+    }
+
+    if($kode_akun == 2){
+      return redirect()-> route('akun.modal');
+    }
+
+    if($kode_akun == 3){
+      return redirect()-> route('akun.pemasukan');
+    }
+
+    if($kode_akun == 4){
+      return redirect()-> route('akun.pengeluaran');
+    }
+
+    if($kode_akun == 5){
+      return redirect()-> route('akun.hutang');
+    }
+
+    if($kode_akun == 6){
+      return redirect()-> route('akun.piutang');
+    }
+  }
+
   //======================== MODAL 2========================
   public function modal()
   {
-    $row_modal = \DB::table('cabang_akuns')->where('id_akun', '2')->get();
-    return view('akun.modal', compact('row_modal'));
+    $row= \DB::table('cabang_akuns')->where('id_akun', '2')->where('status', '1')->get();
+    return view('akun.modal', compact('row'));
   }
 
-  public function modalStore()
+  public function modalStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -50,12 +127,13 @@ class AkunController extends Controller
   //========================PEMASUKAN 3========================
   public function pemasukan()
   {
-    $row_pemasukan = \DB::table('cabang_akuns')->where('id_akun', '3')->get();
-    return view('akun.pemasukan', compact('row_pemasukan'));
+    $row = \DB::table('cabang_akuns')->where('id_akun', '3')->where('status', '1')->get();
+    return view('akun.pemasukan', compact('row'));
   }
 
-  public function pemasukanStore()
+  public function pemasukanStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -69,12 +147,13 @@ class AkunController extends Controller
   //========================PENGELUARAN 4==============
   public function pengeluaran()
   {
-    $row_pengeluaran = \DB::table('cabang_akuns')->where('id_akun', '4')->get();
-    return view('akun.pengeluaran', compact('row_pengeluaran'));
+    $row = \DB::table('cabang_akuns')->where('id_akun', '4')->where('status', '1')->get();
+    return view('akun.pengeluaran', compact('row'));
   }
 
-  public function pengeluaranStore()
+  public function pengeluaranStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -88,12 +167,13 @@ class AkunController extends Controller
   //========================HUTANG========================
   public function hutang()
   {
-    $row_hutang = \DB::table('cabang_akuns')->where('id_akun', '5')->get();
-    return view('akun.hutang', compact('row_hutang'));
+    $row = \DB::table('cabang_akuns')->where('id_akun', '5')->where('status', '1')->get();
+    return view('akun.hutang', compact('row'));
   }
 
-  public function hutangStore()
+  public function hutangStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -107,12 +187,13 @@ class AkunController extends Controller
   //========================PIUTANG========================
   public function piutang()
   {
-    $row_piutang = \DB::table('cabang_akuns')->where('id_akun', '6')->get();
-    return view('akun.piutang', compact('row_piutang'));
+    $row = \DB::table('cabang_akuns')->where('id_akun', '6')->where('status', '1')->get();
+    return view('akun.piutang', compact('row'));
   }
 
-  public function piutangStore()
+  public function piutangStore(Request $request)
   {
+    $this->validateInput($request);
     cabang_akun::create([
       'nama' => request('nama'),
       'kode' => request('kode'),
@@ -121,5 +202,12 @@ class AkunController extends Controller
       'status' => 1,
     ]);
     return redirect()-> route('akun.piutang');
+  }
+
+  private function validateInput($request) {
+      $this->validate($request, [
+          'kode' => 'required|max:10',
+          'nama' => 'required|max:60',
+      ]);
   }
 }
