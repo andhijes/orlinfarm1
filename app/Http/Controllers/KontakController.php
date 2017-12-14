@@ -27,4 +27,10 @@ class KontakController extends Controller
       ]);
       return redirect()-> route('kontak.datakontak');
     }
+
+    public function edit($id_kontak)
+    {
+      $kontak = Contact::find($id_kontak);
+      return view('kontak.datakontakEdit', compact('kontak'));
+    }
 }

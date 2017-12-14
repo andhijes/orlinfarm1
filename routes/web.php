@@ -16,14 +16,21 @@
 // })->middleware('auth');
 
 //---------------------------------------HOME AND CHARTS-------------------------------------//
-Auth::routes();
+
+// Route::get('/', 'HomeController@getCharts')->name('home.charts')->middleware('auth');
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/{tahun}', 'HomeController@getChartsWithParam')->name('home.param');
+// Auth::routes();
+
+// Route::get('/', function () {
+//     return view('home');
+// })->middleware('auth');
 Route::get('/', 'HomeController@getCharts')->name('home.charts')->middleware('auth');
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/{tahun}', 'HomeController@getChartsWithParam')->name('home.param')->middleware('auth');
-//Route::get('/tes', 'HomeController@getChartWithForEach')->name('home.test')->middleware('auth');
 
+Auth::routes();
 
-
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{tahun}', 'HomeController@getChartsWithParam')->name('home.param');
 
 //===========================================================================================//
 Route::get('/produk/create', 'ProdukController@create')->name('produk.create');
