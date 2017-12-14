@@ -29,12 +29,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-
     }
 
     public function getCharts()
     {
-        $yearNow;
+        $yearNow = 2017;
         //Buat chart dengan bikin  manual, tiap dataset valuenya pake array
         //Produk1 -> Jaket Kulit               
         
@@ -104,27 +103,69 @@ class HomeController extends Controller
         
         $data4 = array(array_sum($datasets_jan4), array_sum($datasets_feb4),array_sum($datasets_mar4), array_sum($datasets_apr4), array_sum($datasets_mei4),array_sum($datasets_jun4), array_sum($datasets_jul4), array_sum($datasets_aug4), array_sum($datasets_sep4), array_sum($datasets_okt4), array_sum($datasets_nov4), array_sum($datasets_des4));
 
+        //===============================CHART 2=====================================
+        for($j = 0; $j<4; $j++){
+            for($i=0;$i<12;$i++){
+                $datasets[$j][$i] = DB::table('penjualan_produks')->where('id_produk',$j+1)->where('bulan',$i+1)->where('tahun',$yearNow)->get(['total_hargabeli','total_hargajual'])->toArray();
+            }
+        }
 
+        foreach ($datasets as $key => $value1) {
+            foreach ($value1 as $key => $value2) {
+                $hasils[] = $value2;
+                }
+                
+            }
+        
+        foreach($hasils as $key => $value) {
+            if($value==NULL){
+                //$hasilakhir[] = 0;
+                $hasilkeuntungan[] = 0;
+            }
+            else{
+                $hasilakhirjual[] = $value[0]->total_hargajual;
+                $hasilakhirbeli[] = $value[0]->total_hargabeli;
+                $hasilkeuntungan[] = $value[0]->total_hargajual - $value[0]->total_hargabeli;
+            }
+            
+        }
+            
+        for($i=0;$i<12; $i++){
+            $setdata[] = $hasilkeuntungan[$i];
+        }
+        for($i=12;$i<24; $i++){
+            $setdata2[] = $hasilkeuntungan[$i];
+        }
+        for($i=24;$i<36; $i++){
+            $setdata3[] = $hasilkeuntungan[$i];
+        }
+        for($i=36;$i<48; $i++){
+            $setdata4[] = $hasilkeuntungan[$i];
+        }
+
+        //=======================================================================
         //$dataset1 = Penjualan_produk::all();
         // $data1 = array(array_sum($datasets_jan), array_sum($datasets_feb),array_sum($datasets_mar), array_sum($datasets_apr), array_sum($datasets_mei),array_sum($datasets_jun), array_sum($datasets_jul), array_sum($datasets_aug), array_sum($datasets_sep), array_sum($datasets_okt), array_sum($datasets_nov), array_sum($datasets_des));
         //dd($data1);
-        $chart = Charts::multi('bar', 'chartjs')
+        $chart = Charts::multi('bar', 'c3')
                         ->title('Grafik Penjualan Produk 2017')
                         ->labels(['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DES'])
                         ->colors(['#01579B', '#DD2C00', '#FFD600', '#2E7D32'])
                         ->dataset('Tas Kulit', $data2)
                         ->dataset('Jaket Kulit', $data1)
                         ->dataset('Sepatu Kulit', $data3)
-                        ->dataset('Ikat Pinggang Kulit', $data4);
+                        ->dataset('Ikat Pinggang Kulit', $data4)
+                        ->elementLabel('Dalam Unit');
         
-        $chart2 = Charts ::multi('bar', 'chartjs')
+        $chart2 = Charts ::multi('bar', 'c3')
                         ->title('Grafik Keuntungan Penjualan 2017')
                         ->labels(['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DES'])
                         ->colors(['#01579B', '#DD2C00', '#FFD600', '#2E7D32'])
-                        ->dataset('Tas Kulit', $data2)
-                        ->dataset('Jaket Kulit', $data1)
-                        ->dataset('Sepatu Kulit', $data3)
-                        ->dataset('Ikat Pinggang Kulit', $data4);
+                        ->dataset('Tas Kulit', $setdata2)
+                        ->dataset('Jaket Kulit', $setdata)
+                        ->dataset('Sepatu Kulit', $setdata3)
+                        ->dataset('Ikat Pinggang Kulit', $setdata4)
+                        ->elementLabel('Dalam rupiah');
 
 
         // $chart = Charts::create('bar','material')
@@ -229,14 +270,14 @@ class HomeController extends Controller
         // }
         // dd($newdatasets);
 
-//foreach 4 kali
+//foreach 4 kali, success got the key
         foreach ($datasets as $key => $value1) {
             foreach ($value1 as $key => $value2) {
                 $hasils[] = $value2;
                 }
                 
             }
-//almost right, returns 42 records
+//almost right, returns 42 records, still wrong
             // foreach ($datasets as $key => $value1) {
             //     foreach ($value1 as $key => $value2) {
             //         foreach ($value2 as $key => $value3) {
@@ -247,7 +288,7 @@ class HomeController extends Controller
             //     }
  
 //SUCCESS          
-        foreach ($hasils as $key => $value) {
+        foreach($hasils as $key => $value) {
             if($value==NULL){
                 //$hasilakhir[] = 0;
                 $hasilkeuntungan[] = 0;
@@ -257,7 +298,9 @@ class HomeController extends Controller
                 $hasilakhirbeli[] = $value[0]->total_hargabeli;
                 $hasilkeuntungan[] = $value[0]->total_hargajual - $value[0]->total_hargabeli;
             }
+            
         }
+        
         for($i=0;$i<12; $i++){
             $setdata[] = $hasilkeuntungan[$i];
         }
@@ -416,15 +459,15 @@ class HomeController extends Controller
          return view('home',compact(['chart', 'chart2', 'yearNow']));
     }
 
-    public function getChartWithForEach(){
-        $hasils = array();
-        $datas = Penjualan_produk::all();
-        foreach ($datas as $data) {
-            $hasils[] = $data->total_hargajual;            
-        } 
-        dd($hasils);
+    // public function getChartWithForEach(){
+    //     $hasils = array();
+    //     $datas = Penjualan_produk::all();
+    //     foreach($datas as $data) {
+    //         $hasils[] = $data->total_hargajual;            
+    //     } 
+    //     dd($hasils);
 
-        return view('home');
-    }
+    //     return view('home');
+    // }
     
 }

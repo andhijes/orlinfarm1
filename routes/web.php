@@ -16,13 +16,15 @@
 // })->middleware('auth');
 
 //---------------------------------------HOME AND CHARTS-------------------------------------//
-Route::get('/', 'HomeController@getCharts')->name('home')->middleware('auth');
+Auth::routes();
+Route::get('/', 'HomeController@getCharts')->name('home.charts')->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/{tahun}', 'HomeController@getChartsWithParam')->name('home.param')->middleware('auth');
 //Route::get('/tes', 'HomeController@getChartWithForEach')->name('home.test')->middleware('auth');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
 //===========================================================================================//
 Route::get('/produk/create', 'ProdukController@create')->name('produk.create');
 Route::get('/produk/history', 'ProdukController@history')->name('produk.history');

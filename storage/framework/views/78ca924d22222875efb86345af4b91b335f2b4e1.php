@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo e(route('home')); ?>" class="site_title"><i class="fa fa-area-chart"></i> <span>Orlinfarm</span></a>
+              <a href="<?php echo e(route('home.charts')); ?>" class="site_title"><i class="fa fa-area-chart"></i> <span>Orlinfarm</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -63,7 +63,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo e(route('home')); ?>"><i class="fa fa-home"></i> Home </a>
+                  <li><a href="<?php echo e(route('home.charts')); ?>"><i class="fa fa-home"></i> Home </a>
                   </li>
 
                   <!-- <li><a href="<?php echo e(route('kontak.datakontak')); ?>"><i  class="fa fa-users"></i> Data Kontak</li> -->
